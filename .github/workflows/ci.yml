@@ -1,0 +1,33 @@
+name: ROS 2 Jazzy CLI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main. master]
+
+jobs:
+  ros_build_and_test:
+    runs-on: ubuntu-latest
+
+    container:
+      image: osrf/ros:jazzy-ros-base 
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update Package Lists
+        run: apt-get update
+
+      - name: Install Dependencies 
+        run: |
+          rosdep update
+          rosdep install --from-paths src --ignore-src -y --rosdistro jazzy
+        
+
+      - name: Build Workspace
+        run: |
+          ./opt/ros/jazzy/setup.sh
+          colcon build --symlink-install 
+        

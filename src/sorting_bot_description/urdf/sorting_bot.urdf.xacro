@@ -250,7 +250,8 @@
 
     <!--GAZEBO TAGS -->
 
-    <ros2_control name="GazeboSimSystem" type="system">
+
+    <ros2_control name="SortingRobotHardwareInterface" type="system">
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>

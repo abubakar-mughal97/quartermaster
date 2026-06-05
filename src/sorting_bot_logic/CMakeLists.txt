@@ -21,6 +21,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# Install the launch, config, and rviz directories into the share installation directory
 install(DIRECTORY
   config
   launch 

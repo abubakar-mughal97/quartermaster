@@ -309,14 +309,14 @@
         </inertial>
     </link>
 
-    <!-- Right finger: MIMICS the left, sliding the opposite direction (-x) -->
+    <!-- Right finger: now independently commanded (no mimic) -->
     <joint name="right_finger_joint" type="prismatic">
         <parent link="gripper_base_link"/>
         <child link="right_finger_link"/>
         <origin xyz="-0.005 0 0.02" rpy="0 0 0"/>
         <axis xyz="-1 0 0"/>
         <limit lower="0.0" upper="0.04" effort="50.0" velocity="0.1"/>
-        <mimic joint="left_finger_joint" multiplier="1.0" offset="0.0"/>
+
     </joint>
 
     <link name="right_finger_link">
@@ -349,68 +349,8 @@
 
     <link name="gripper_tcp_link"/>
 
-    <!--GAZEBO TAGS -->
-
-
-    <ros2_control name="SortingRobotHardwareInterface" type="system">
-        <hardware>
-            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-        </hardware>
-
-        <joint name="joint_1">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-
-        <joint name="joint_2">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-
-        <joint name="joint_3">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-
-        <joint name="joint_4">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-
-        <joint name="joint_5">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-
-        <joint name="joint_6">
-            <command_interface name="position"/>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity"/>
-        </joint>
-    </ros2_control>
 
 
 
-    <gazebo>
-        <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters>$(find quartermaster_gazebo)/config/quartermaster_controllers.yaml</parameters>
-        </plugin>
-    </gazebo>
+    <xacro:include filename="$(find quartermaster_description)/urdf/quartermaster.gazebo.xacro" />
 </robot>

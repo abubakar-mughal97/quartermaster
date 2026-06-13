@@ -73,6 +73,13 @@ def generate_launch_description():
         output="screen",
     )
 
+    gripper_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["gripper_controller"],
+        output="screen",
+    )
+
     # 7. Use Event Handlers to enforce execution order
     # The controllers will crash if they try to launch BEFORE the robot finishes spawning in Gazebo.
     delay_broadcaster = RegisterEventHandler(
@@ -85,6 +92,13 @@ def generate_launch_description():
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
             on_exit=[arm_controller_spawner],
+        )
+    )
+
+    delay_gripper_controller = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=arm_controller_spawner,
+            on_exit=[gripper_controller_spawner],
         )
     )
 
@@ -108,6 +122,8 @@ def generate_launch_description():
             robot_state_publisher_node,
             delay_broadcaster,
             delay_arm_controller,
+            delay_gripper_controller,
             bridge_node,
+
         ]
     )

@@ -8,12 +8,12 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def generate_launch_description():
-    pkg_logic = get_package_share_directory("quartermaster_logic")
+    pkg_gazebo = get_package_share_directory("quartermaster_gazebo")
     pkg_moveit_config = get_package_share_directory("quartermaster_moveit_config")
 
     simulation_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(pkg_logic, "launch", "simulation.launch.py")
+            os.path.join(pkg_gazebo, "launch", "simulation.launch.py")
         )
     )
 

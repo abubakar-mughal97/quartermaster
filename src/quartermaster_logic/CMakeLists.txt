@@ -22,11 +22,7 @@ if(BUILD_TESTING)
 endif()
 
 # Install the launch, config, and rviz directories into the share installation directory
-install(DIRECTORY
-  config
-  launch 
-  DESTINATION share/${PROJECT_NAME}
-)
+
 
 install(PROGRAMS
   scripts/robot_automation.py

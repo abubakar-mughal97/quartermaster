@@ -11,7 +11,6 @@ import xacro
 def generate_launch_description():
     # 1. Locate package paths
     pkg_description = get_package_share_directory("quartermaster_description")
-    pkg_logic = get_package_share_directory("quartermaster_logic")
 
     # 2. Parse the URDF/Xacro file natively via Python
     xacro_file = os.path.join(pkg_description, "urdf", "quartermaster.urdf.xacro")
@@ -109,6 +108,6 @@ def generate_launch_description():
             robot_state_publisher_node,
             delay_broadcaster,
             delay_arm_controller,
-            bridge_node
+            bridge_node,
         ]
     )

@@ -351,6 +351,8 @@
 
 
 
-
-    <xacro:include filename="$(find quartermaster_description)/urdf/quartermaster.gazebo.xacro" />
+    <xacro:arg name="use_gazebo" default="false" />
+    <xacro:if value="$(arg use_gazebo)">
+        <xacro:include filename="$(find quartermaster_description)/urdf/quartermaster.gazebo.xacro" />
+    </xacro:if>
 </robot>

@@ -14,7 +14,9 @@ def generate_launch_description():
 
     # 2. Parse the URDF/Xacro file natively via Python
     xacro_file = os.path.join(pkg_description, "urdf", "quartermaster.urdf.xacro")
-    robot_description_xml = xacro.process_file(xacro_file).toxml()
+    robot_description_xml = xacro.process_file(
+        xacro_file, mappings={"use_gazebo": "true"}
+    ).toxml()
 
     # 3. Include the official Gazebo ROS system launch file (Spawns a blank world)
     # ROS 2 Jazzy uses the modern Gazebo Harmonic simulator ecosystem
@@ -124,6 +126,5 @@ def generate_launch_description():
             delay_arm_controller,
             delay_gripper_controller,
             bridge_node,
-
         ]
     )
